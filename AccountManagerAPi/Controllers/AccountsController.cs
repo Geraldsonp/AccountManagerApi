@@ -23,7 +23,22 @@ namespace AccountManagerAPi.Controllers
         {
             var account = await _accountService.CreateAccountAsync(request.InitialBalance, request.AccountType, request.ClientId);
 
-            return CreatedAtAction(nameof(ClientsController.GetAccountAsync), new { accountNumber = account.NumeroCuenta, clientId = account.ClienteId }, account);
+            return CreatedAtAction(nameof(GetClientAccountAsync), new { accountNumber = account.NumeroCuenta, clientId = account.ClienteId }, account);
+        }
+
+        [HttpGet("/clients/{clientId}/accounts/{accountNumber}")]
+        public async Task<IActionResult> GetClientAccountAsync(int clientId, int accountNumber)
+        {
+            var account = await _accountService.GetAccountByClientAsync(accountNumber, clientId);
+            return Ok(account);
+        }
+
+        [HttpGet("/clients/{clientId}/accounts")]
+        public async Task<IActionResult> GetClientAccountsAsync(int clientId)
+        {
+            var accounts = await _accountService.GetAccountsByClientAsync(clientId);
+
+            return Ok(accounts);
         }
 
 
@@ -37,7 +52,7 @@ namespace AccountManagerAPi.Controllers
 
         //method only available for admin users
         [HttpGet]
-        public async Task<IActionResult> GetAccountsAsync(int clientId)
+        public async Task<IActionResult> GetAccountsAsync()
         {
             var accounts = await _accountService.GetAccountsAsync();
 

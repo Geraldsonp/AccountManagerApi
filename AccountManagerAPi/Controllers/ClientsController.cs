@@ -8,13 +8,5 @@ namespace AccountManagerAPi.Controllers
     public class ClientsController : ControllerBase
     {
 
-
-        [HttpGet("{clientId}/accounts/{accountNumber}")]
-        public async Task<IActionResult> GetAccountAsync(int clientId, int accountNumber)
-        {
-            throw new NotImplementedException();
-            return Ok();
-        }
-
     }
 }
