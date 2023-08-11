@@ -6,8 +6,8 @@ namespace ApplicationLayer.Services;
 
 public class AccountService : IAccountService
 {
-    private readonly ICuentaRepository _accountRepository;
-    public AccountService(ICuentaRepository accountRepository)
+    private readonly IAccountRepository _accountRepository;
+    public AccountService(IAccountRepository accountRepository)
     {
         _accountRepository = accountRepository;
     }
@@ -26,22 +26,31 @@ public class AccountService : IAccountService
         return account;
     }
 
-    public Task<Cuenta> GetAccountAsync(int accountNumber, int clientId)
+    public Task<Cuenta> GetAccountByClientAsync(int accountNumber, int clientId)
     {
-        var account = _accountRepository.GetByAccountNumberAsync(accountNumber, clientId);
+        var account = _accountRepository.Get(c => c.NumeroCuenta == accountNumber && c.ClienteId == clientId);
         return account;
     }
 
-    public Task<IEnumerable<Cuenta>> GetAccountsAsync(int clientId)
+    public async Task<IEnumerable<Cuenta>> GetAccountsByClientAsync(int clientId)
     {
-        return await _accountRepository.Get(clientId);
+        return await _accountRepository.GetAll(x => x.ClienteId == clientId);
     }
 
-    public Task<Cuenta> UpdateAccountStatusAsync(AccountStatus accountStatus, int AccountNumber)
+    public async Task<Cuenta> UpdateAccountStatusAsync(AccountStatus accountStatus, int AccountNumber)
     {
-        var account = _accountRepository.GetByAccountNumberAsync(AccountNumber);
+        var account = await _accountRepository.Get(c => c.NumeroCuenta == AccountNumber);
         account.Estado = accountStatus.ToString();
         await _accountRepository.Update(account);
         return account;
+    }
+
+    public Task<Cuenta> GetAccountAsync(int id)
+    {
+        return _accountRepository.Get(c => c.NumeroCuenta == id);
+    }
+    public async Task<IEnumerable<Cuenta>> GetAccountsAsync()
+    {
+        return await _accountRepository.GetAll(c => true);
     }
 }

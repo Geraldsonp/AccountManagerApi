@@ -1,4 +1,6 @@
-﻿using DataAccessLayer.Models;
+﻿using ApplicationLayer.Domain.Contracts;
+using DataAccessLayer.Models;
+using DataAccessLayer.Repos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,10 +11,12 @@ public static class ServicesConfiguration
 {
     public static IServiceCollection RegisterDalServices(this IServiceCollection services, IConfiguration config)
     {
-        var connectionString = config.GetConnectionString("DbConnection");
+        var connectionString = config.GetConnectionString("DefaultConnection");
         services.AddDbContext<AccountMngDbContext>(options => options.UseSqlServer(connectionString));
-        
-        
+
+        services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<IAccountRepository, AccountRepository>();
+
         return services;
     }
 }

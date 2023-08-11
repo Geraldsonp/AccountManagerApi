@@ -12,4 +12,8 @@ public class NotFoundException : DomainException
     {
         StatusCode = 404;
     }
+    public NotFoundException(string entityName) : base($"{entityName} was not found")
+    {
+        StatusCode = 404;
+    }
 }
