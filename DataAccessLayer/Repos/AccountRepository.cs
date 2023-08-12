@@ -8,11 +8,11 @@ using System.Linq;
 
 namespace DataAccessLayer.Repos;
 
-public class AccountRepository : CrudBaseRepo<Cuenta>, IAccountRepository
+public class AccountRepository : CrudBaseRepo<Account>, IAccountRepository
 {
-    private readonly AccountMngDbContext _context;
+    private readonly AccountsManagerDbContext _context;
 
-    public AccountRepository(AccountMngDbContext context) : base(context)
+    public AccountRepository(AccountsManagerDbContext context) : base(context)
     {
         _context = context;
     }

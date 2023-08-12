@@ -2,7 +2,7 @@ using System;
 
 namespace ApplicationLayer.Domain.Enums
 {
-    public enum AccountStatus
+    public enum Status
     {
         Active,
         Inactive

@@ -12,7 +12,7 @@ public static class ServicesConfiguration
     public static IServiceCollection RegisterDalServices(this IServiceCollection services, IConfiguration config)
     {
         var connectionString = config.GetConnectionString("DefaultConnection");
-        services.AddDbContext<AccountMngDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddDbContext<AccountsManagerDbContext>(options => options.UseSqlServer(connectionString));
 
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();

@@ -1,6 +1,6 @@
 ﻿namespace ApplicationLayer.Domain.Contracts;
 
-public interface IAccountRepository : ICrud<Cuenta>
+public interface IAccountRepository : ICrud<Account>
 {
 
 }

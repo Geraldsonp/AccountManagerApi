@@ -7,9 +7,9 @@ namespace DataAccessLayer.Repos;
 
 public abstract class CrudBaseRepo<T> : ICrud<T> where T : class
 {
-    private readonly AccountMngDbContext _context;
+    private readonly AccountsManagerDbContext _context;
 
-    public CrudBaseRepo(AccountMngDbContext context)
+    public CrudBaseRepo(AccountsManagerDbContext context)
     {
         _context = context;
     }

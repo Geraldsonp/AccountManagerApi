@@ -3,9 +3,9 @@ using ApplicationLayer.Domain.Contracts;
 using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Repos;
-public class ClientRepository : CrudBaseRepo<Cliente>, IClientRepository
+public class ClientRepository : CrudBaseRepo<ApplicationLayer.Domain.Client>, IClientRepository
 {
-    public ClientRepository(AccountMngDbContext context) : base(context)
+    public ClientRepository(AccountsManagerDbContext context) : base(context)
     {
 
     }

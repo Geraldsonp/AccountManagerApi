@@ -1,39 +1,49 @@
-﻿Create Database AccountMngDB;
+﻿drop database if exists AccountsManagerDB
+go
+
+CREATE DATABASE AccountsManagerDB;
+
+USE AccountsManagerDB;
+
+CREATE DATABASE AccountMngDB;
 
 USE AccountMngDB;
 
+-- CREATE TABLE Person (Remove this section, as you don't need a separate table for Person)
 
-create table Persona(PersonaID INT PRIMARY KEY IDENTITY ,
-     Nombre VARCHAR(100) NOT NULL,
-     Genero VARCHAR(10) NOT NULL,
-     Edad INT NOT NULL,
-     Identificacion VARCHAR(20) NOT NULL,
-     Direccion VARCHAR(200) NOT NULL,
-     Telefono VARCHAR(15) NOT NULL)
-
-
-CREATE TABLE  Cliente (
-      ClienteID INT PRIMARY KEY,
-      PersonaID INT UNIQUE,
-      Contrasena VARCHAR(50) NOT NULL,
-      Estado VARCHAR(20) NOT NULL,
-      FOREIGN KEY (PersonaID) REFERENCES Persona(PersonaID)
+CREATE TABLE Client
+(
+    ClientID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Gender VARCHAR(10) NOT NULL,
+    Age INT NOT NULL,
+    Identification VARCHAR(20) NOT NULL,
+    Address VARCHAR(200) NOT NULL,
+    Phone VARCHAR(15) NOT NULL,
+    Password VARCHAR(50) NOT NULL,
+    Status VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE Cuenta (
-NumeroCuenta INT PRIMARY KEY,
-TipoCuenta VARCHAR(50) NOT NULL,
-SaldoInicial DECIMAL(10, 2) NOT NULL,
-Estado VARCHAR(20) NOT NULL
+CREATE TABLE Account
+(
+    AccountNumber VARCHAR(20) PRIMARY KEY,
+    AccountType VARCHAR(50) NOT NULL,
+    InitialBalance DECIMAL(10, 2) NOT NULL,
+    Status VARCHAR(20) NOT NULL,
+    ClientID INT NOT NULL,
+    FOREIGN KEY (ClientID) REFERENCES Client(ClientID)
 );
 
--- Tabla para Movimientos
-CREATE TABLE Movimientos (
-     MovimientoID INT PRIMARY KEY IDENTITY ,
-     NumeroCuenta INT,
-     Fecha DATETIME NOT NULL,
-     TipoMovimiento VARCHAR(50) NOT NULL,
-     Valor DECIMAL(10, 2) NOT NULL,
-     Saldo DECIMAL(10, 2) NOT NULL,
-     FOREIGN KEY (NumeroCuenta) REFERENCES Cuenta(NumeroCuenta)
+-- Table for Transactions
+CREATE TABLE Transactions
+(
+    TransactionID INT PRIMARY KEY IDENTITY,
+    AccountNumber VARCHAR(20),
+    Date DATETIME NOT NULL,
+    TransactionType VARCHAR(50) NOT NULL,
+    Amount DECIMAL(10, 2) NOT NULL,
+    Balance DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (AccountNumber) REFERENCES Account(AccountNumber)
 );
+
+

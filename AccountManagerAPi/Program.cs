@@ -1,4 +1,5 @@
 using DataAccessLayer;
+using ApplicationLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterDalServices(builder.Configuration);
-
+builder.Services.AddServiceLayer();
 var app = builder.Build();
 
 

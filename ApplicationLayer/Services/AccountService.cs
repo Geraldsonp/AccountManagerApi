@@ -11,14 +11,14 @@ public class AccountService : IAccountService
     {
         _accountRepository = accountRepository;
     }
-    public async Task<Cuenta> CreateAccountAsync(decimal initialBalance, AccountType accountType, int clientId)
+    public async Task<Account> CreateAccountAsync(decimal initialBalance, AccountType accountType, int clientId)
     {
-        var account = new Cuenta
+        var account = new Account
         {
-            SaldoInicial = initialBalance,
-            TipoCuenta = accountType.ToString(),
-            Estado = AccountStatus.Active.ToString(),
-            ClienteId = clientId
+            InitialBalance = initialBalance,
+            AccountType = accountType,
+            Status = Status.Active,
+            ClientId = clientId
         };
 
         await _accountRepository.Create(account);
@@ -26,30 +26,30 @@ public class AccountService : IAccountService
         return account;
     }
 
-    public Task<Cuenta> GetAccountByClientAsync(int accountNumber, int clientId)
+    public Task<Account> GetAccountByClientAsync(string accountNumber, int clientId)
     {
-        var account = _accountRepository.Get(c => c.NumeroCuenta == accountNumber && c.ClienteId == clientId);
+        var account = _accountRepository.Get(c => c.AccountNumber == accountNumber && c.ClientId == clientId);
         return account;
     }
 
-    public async Task<IEnumerable<Cuenta>> GetAccountsByClientAsync(int clientId)
+    public async Task<IEnumerable<Account>> GetAccountsByClientAsync(int clientId)
     {
-        return await _accountRepository.GetAll(x => x.ClienteId == clientId);
+        return await _accountRepository.GetAll(x => x.ClientId == clientId);
     }
 
-    public async Task<Cuenta> UpdateAccountStatusAsync(AccountStatus accountStatus, int AccountNumber)
+    public async Task<Account> UpdateAccountStatusAsync(Status accountStatus, string AccountNumber)
     {
-        var account = await _accountRepository.Get(c => c.NumeroCuenta == AccountNumber);
-        account.Estado = accountStatus.ToString();
+        var account = await _accountRepository.Get(c => c.AccountNumber == AccountNumber);
+        account.Status = accountStatus;
         await _accountRepository.Update(account);
         return account;
     }
 
-    public Task<Cuenta> GetAccountAsync(int id)
+    public Task<Account> GetAccountAsync(string id)
     {
-        return _accountRepository.Get(c => c.NumeroCuenta == id);
+        return _accountRepository.Get(c => c.AccountNumber == id);
     }
-    public async Task<IEnumerable<Cuenta>> GetAccountsAsync()
+    public async Task<IEnumerable<Account>> GetAccountsAsync()
     {
         return await _accountRepository.GetAll(c => true);
     }
