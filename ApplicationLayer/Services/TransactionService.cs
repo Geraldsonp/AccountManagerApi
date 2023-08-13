@@ -17,6 +17,8 @@ namespace ApplicationLayer.Services
         }
         public async Task<Transaction> CreateTransactionAsync(string accountNumber, decimal amount)
         {
+            _ = await _accountRepository.DoesAccountExist(accountNumber);
+
             var account = await _accountRepository.GetAccountWithTransactions(accountNumber);
 
             var transaction = new Transaction(amount, accountNumber);
@@ -29,17 +31,20 @@ namespace ApplicationLayer.Services
 
         public async Task DeleteTransactionAsync(int id, string accountNumber)
         {
+            _ = await _accountRepository.DoesAccountExist(accountNumber);
             var transaction = await _transactionRepository.Get(t => t.TransactionId == id && t.AccountNumber == accountNumber);
             await _transactionRepository.Delete(transaction);
         }
 
-        public Task<Transaction> GetTransactionAsync(int transactionId, string accountNumber)
+        public async Task<Transaction> GetTransactionAsync(int transactionId, string accountNumber)
         {
-            return _transactionRepository.Get(t => t.TransactionId == transactionId && t.AccountNumber == accountNumber);
+            _ = await _accountRepository.DoesAccountExist(accountNumber);
+            return await _transactionRepository.Get(t => t.TransactionId == transactionId && t.AccountNumber == accountNumber);
         }
 
         public async Task<IEnumerable<Transaction>> GetTransactionsAsync(string accountNumber)
         {
+            _ = await _accountRepository.DoesAccountExist(accountNumber);
             return await _transactionRepository.GetAll(t => t.AccountNumber == accountNumber);
         }
 

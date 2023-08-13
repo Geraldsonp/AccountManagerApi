@@ -4,7 +4,7 @@ namespace ApplicationLayer.Domain.Enums
 {
     public enum Status
     {
-        Active,
-        Inactive
+        Inactive,
+        Active
     }
 }
