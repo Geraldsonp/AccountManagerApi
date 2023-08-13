@@ -55,4 +55,9 @@ public class AccountService : IAccountService
         return await _accountRepository.GetAccountsWithTransactions();
     }
 
+    public async Task DeleteAccountAsync(string accountNumber)
+    {
+        var account = await _accountRepository.Get(c => c.AccountNumber == accountNumber);
+        await _accountRepository.Delete(account);
+    }
 }

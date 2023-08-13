@@ -12,4 +12,5 @@ public interface IAccountService
     Task<IEnumerable<Account>> GetAccountsByClientAsync(int clientId);
     Task<Account> CreateAccountAsync(decimal initialBalance, AccountType accountType, int clientId);
     Task<Account> UpdateAccountStatusAsync(Status accountStatus, string AccountNumber);
+    Task DeleteAccountAsync(string accountNumber);
 }

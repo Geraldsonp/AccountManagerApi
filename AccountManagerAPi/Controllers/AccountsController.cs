@@ -36,6 +36,7 @@ namespace AccountManagerAPi.Controllers
             return Ok(accountReponse);
         }
 
+
         [HttpGet("/Clients/{clientId}/accounts/{accountNumber}")]
         [ActionName("GetClientAccount")]
         public async Task<IActionResult> GetClientAccountAsync(int clientId, string accountNumber)
@@ -70,6 +71,13 @@ namespace AccountManagerAPi.Controllers
             var accounts = await _accountService.GetAccountsAsync();
             var accountsReponse = accounts.Adapt<List<AccountResponse>>();
             return Ok(accountsReponse);
+        }
+
+        [HttpDelete("{accountNumber}")]
+        public async Task<IActionResult> DeleteAccountAsync(string accountNumber)
+        {
+            await _accountService.DeleteAccountAsync(accountNumber);
+            return NoContent();
         }
 
     }
