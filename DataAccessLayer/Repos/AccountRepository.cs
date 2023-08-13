@@ -38,4 +38,14 @@ public class AccountRepository : CrudBaseRepo<Account>, IAccountRepository
 
         return await _context.Accounts.Where(a => a.ClientId == clientId).Include(a => a.Transactions).ToListAsync();
     }
+
+    public async Task<bool> DoesAccountExist(string accountNumber)
+    {
+        var result = await _context.Accounts.AnyAsync(a => a.AccountNumber == accountNumber);
+
+        if (!result)
+            throw new NotFoundException(nameof(Account), accountNumber);
+
+        return result;
+    }
 }
