@@ -1,6 +1,8 @@
 using System;
 using ApplicationLayer.Domain;
 using ApplicationLayer.Domain.Contracts;
+using ApplicationLayer.Domain.Exceptions;
+using ApplicationLayer.Domain.Models;
 
 
 namespace ApplicationLayer.Services
@@ -17,7 +19,7 @@ namespace ApplicationLayer.Services
         }
         public async Task<Transaction> CreateTransactionAsync(string accountNumber, decimal amount)
         {
-            ValidateAccountExists(accountNumber);
+            await ValidateAccountExists(accountNumber);
 
             var account = await _accountRepository.GetAccountWithTransactions(accountNumber);
 
@@ -31,26 +33,26 @@ namespace ApplicationLayer.Services
 
         public async Task DeleteTransactionAsync(int id, string accountNumber)
         {
-            ValidateAccountExists(accountNumber);
+            await ValidateAccountExists(accountNumber);
             var transaction = await _transactionRepository.Get(t => t.TransactionId == id && t.AccountNumber == accountNumber);
             await _transactionRepository.Delete(transaction);
         }
 
         public async Task<Transaction> GetTransactionAsync(int transactionId, string accountNumber)
         {
-            ValidateAccountExists(accountNumber);
+            await ValidateAccountExists(accountNumber);
             return await _transactionRepository.Get(t => t.TransactionId == transactionId && t.AccountNumber == accountNumber);
         }
 
         public async Task<IEnumerable<Transaction>> GetTransactionsAsync(string accountNumber)
         {
-            ValidateAccountExists(accountNumber);
+            await ValidateAccountExists(accountNumber);
             return await _transactionRepository.GetAll(t => t.AccountNumber == accountNumber);
         }
 
-        private void ValidateAccountExists(string accountNumber)
+        private async Task ValidateAccountExists(string accountNumber)
         {
-            if (!_accountRepository.DoesAccountExist(accountNumber))
+            if (!await _accountRepository.DoesAccountExist(accountNumber))
                 throw new NotFoundException(nameof(Account), accountNumber);
         }
 

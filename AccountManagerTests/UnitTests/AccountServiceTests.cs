@@ -31,6 +31,14 @@ namespace AccountManagerTests.UnitTests
             var accountType = AccountType.Checking;
             var clientId = 1;
 
+            var account = new Account
+            {
+                InitialBalance = initialBalance,
+                AccountType = accountType,
+                ClientId = clientId,
+                Status = Status.Active
+            };
+
             _accountRepository.Create(Arg.Any<Account>()).Returns(callInfo =>
             {
                 var createdAccount = callInfo.Arg<Account>();
@@ -38,7 +46,7 @@ namespace AccountManagerTests.UnitTests
             });
 
             // Act
-            var result = await _accountService.CreateAccountAsync(initialBalance, accountType, clientId);
+            var result = await _accountService.CreateAccountAsync(account);
 
             // Assert
             Assert.NotNull(result);
