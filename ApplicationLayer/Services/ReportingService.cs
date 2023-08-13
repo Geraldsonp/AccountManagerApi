@@ -19,33 +19,28 @@ namespace ApplicationLayer.Services
 
 
 
-        public async Task<AccountStatusReport> GetAccountStatusReport(int clientId, DateTime? startDate, DateTime? endDate)
+        public async Task<IEnumerable<AccountStatusReport>> GetAccountStatusReport(int clientId, DateTime? startDate, DateTime? endDate)
         {
             var client = await _clientRepository.Get(x => x.ClientId == clientId);
 
             var accounts = await _accountRepository.GetAccountsWithTransactions(clientId);
 
-            var report = new AccountStatusReport
-            {
-                ClientId = clientId,
-            };
+            List<AccountStatusReport> reports = new List<AccountStatusReport>();
 
             foreach (var account in accounts)
             {
-                var accountStatus = new AccountStatus
+                var report = new AccountStatusReport
                 {
+                    Client = client.Name,
                     AccountNumber = account.AccountNumber,
-                    CurrentBalance = account.GetCurrentBalance(),
-                    DebitsTotal = account.Transactions.Where(x => x.TransactionType == TransactionType.Debit
-                        && x.Date.Date >= startDate && x.Date.Date <= endDate).Sum(x => x.Amount),
-                    CreditsTotal = account.Transactions.Where(x => x.TransactionType == TransactionType.Credit
-                        && x.Date.Date >= startDate && x.Date.Date <= endDate).Sum(x => x.Amount)
+                    InitialBalance = account.InitialBalance,
+                    Transaction = account.Transactions.Where(x => x.Date.Date >= startDate && x.Date.Date <= endDate).Sum(x => x.Amount),
+                    AvailableBalance = account.GetCurrentBalance()
                 };
-
-                report.Accounts.Add(accountStatus);
+                reports.Add(report);
             }
 
-            return report;
+            return reports;
         }
 
     }

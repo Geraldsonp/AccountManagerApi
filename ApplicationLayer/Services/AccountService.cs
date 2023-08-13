@@ -12,18 +12,9 @@ public class AccountService : IAccountService
     {
         _accountRepository = accountRepository;
     }
-    public async Task<Account> CreateAccountAsync(decimal initialBalance, AccountType accountType, int clientId)
+    public async Task<Account> CreateAccountAsync(Account account)
     {
-        var account = new Account
-        {
-            InitialBalance = initialBalance,
-            AccountType = accountType,
-            Status = Status.Active,
-            ClientId = clientId
-        };
-
         await _accountRepository.Create(account);
-
         return account;
     }
 

@@ -6,7 +6,7 @@ namespace ApplicationLayer.Domain.Models;
 
 public class Account
 {
-    public string AccountNumber { get; set; } = AccountNumberGenerator.GenerateRandomAccountNumber();
+    public string AccountNumber { get; set; } = null!;
 
     public AccountType AccountType { get; set; }
 

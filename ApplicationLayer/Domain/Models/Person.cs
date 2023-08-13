@@ -8,7 +8,7 @@ public class Person
 
     public int Age { get; set; }
 
-    public string Identification { get; set; } = null!;
+    public string Identification { get; set; } = "00-000-0000-00";
 
     public string Address { get; set; } = null!;
 

@@ -1,5 +1,6 @@
 using System;
 using AccountManagerAPi.Dtos;
+using ApplicationLayer.Domain.Models;
 using ApplicationLayer.Services;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,8 @@ namespace AccountManagerAPi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAccountAsync([FromBody] CreateAccountRequest request)
         {
-            var account = await _accountService.CreateAccountAsync(request.InitialBalance, request.AccountType, request.ClientId);
+            var account = request.Adapt<Account>();
+            _ = await _accountService.CreateAccountAsync(account);
             var accountReponse = account.Adapt<AccountResponse>();
             return CreatedAtAction("GetClientAccount", new { clientId = account.ClientId, accountNumber = account.AccountNumber }, accountReponse);
         }
