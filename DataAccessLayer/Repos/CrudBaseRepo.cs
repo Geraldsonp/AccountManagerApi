@@ -2,6 +2,7 @@
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using ApplicationLayer.Domain.Exceptions;
+using System.Linq.Expressions;
 
 namespace DataAccessLayer.Repos;
 
@@ -14,15 +15,24 @@ public abstract class CrudBaseRepo<T> : ICrud<T> where T : class
         _context = context;
     }
 
-    public async Task<T> Get(Func<T, bool> predicate)
+    public async Task<T> Get(Expression<Func<T, bool>> predicate)
     {
-        var model = await _context.Set<T>().FirstOrDefaultAsync(x => predicate(x)) ?? throw new NotFoundException(nameof(T));
+        var model = await _context.Set<T>().FirstOrDefaultAsync(predicate) ?? throw new NotFoundException(typeof(T).Name);
         return model;
     }
 
-    public async Task<IEnumerable<T>> GetAll(Func<T, bool> predicate)
+    public async Task<List<T>> GetAll(Expression<Func<T, bool>>? predicate = null)
     {
-        return await _context.Set<T>().Where(x => predicate(x)).ToListAsync();
+        List<T> models;
+
+        if (predicate == null)
+        {
+            models = await _context.Set<T>().ToListAsync();
+            return models;
+        }
+
+        models = _context.Set<T>().Where(predicate).ToList();
+        return models;
     }
 
     public async Task<T> Create(T model)

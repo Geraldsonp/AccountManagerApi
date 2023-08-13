@@ -1,4 +1,9 @@
-﻿namespace ApplicationLayer.Domain;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using ApplicationLayer.Domain.Enums;
+using ApplicationLayer.Domain.Models;
+
+namespace ApplicationLayer.Domain;
 
 public class Transaction
 {
@@ -8,11 +13,25 @@ public class Transaction
 
     public DateTime Date { get; set; }
 
-    public string TransactionType { get; set; } = null!;
-
     public decimal Amount { get; set; }
+    public TransactionType TransactionType { get; set; }
 
-    public decimal Balance { get; set; }
+    [Column("Balance")]
+    public decimal AvailableBalance { get; set; }
 
+    [JsonIgnore]
     public virtual Account? AccountNumberNavigation { get; set; }
+
+    public Transaction(decimal amount, string accountNumber)
+    {
+        Amount = amount;
+        Date = DateTime.Now;
+        TransactionType = amount > 0 ? TransactionType.Credit : TransactionType.Debit;
+        AccountNumber = accountNumber;
+    }
+
+    private Transaction()
+    {
+    }
+
 }
