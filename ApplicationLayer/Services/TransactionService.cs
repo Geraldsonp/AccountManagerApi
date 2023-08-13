@@ -17,7 +17,7 @@ namespace ApplicationLayer.Services
         }
         public async Task<Transaction> CreateTransactionAsync(string accountNumber, decimal amount)
         {
-            _ = await _accountRepository.DoesAccountExist(accountNumber);
+            ValidateAccountExists(accountNumber);
 
             var account = await _accountRepository.GetAccountWithTransactions(accountNumber);
 
@@ -31,21 +31,27 @@ namespace ApplicationLayer.Services
 
         public async Task DeleteTransactionAsync(int id, string accountNumber)
         {
-            _ = await _accountRepository.DoesAccountExist(accountNumber);
+            ValidateAccountExists(accountNumber);
             var transaction = await _transactionRepository.Get(t => t.TransactionId == id && t.AccountNumber == accountNumber);
             await _transactionRepository.Delete(transaction);
         }
 
         public async Task<Transaction> GetTransactionAsync(int transactionId, string accountNumber)
         {
-            _ = await _accountRepository.DoesAccountExist(accountNumber);
+            ValidateAccountExists(accountNumber);
             return await _transactionRepository.Get(t => t.TransactionId == transactionId && t.AccountNumber == accountNumber);
         }
 
         public async Task<IEnumerable<Transaction>> GetTransactionsAsync(string accountNumber)
         {
-            _ = await _accountRepository.DoesAccountExist(accountNumber);
+            ValidateAccountExists(accountNumber);
             return await _transactionRepository.GetAll(t => t.AccountNumber == accountNumber);
+        }
+
+        private void ValidateAccountExists(string accountNumber)
+        {
+            if (!_accountRepository.DoesAccountExist(accountNumber))
+                throw new NotFoundException(nameof(Account), accountNumber);
         }
 
     }

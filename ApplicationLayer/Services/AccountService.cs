@@ -1,6 +1,7 @@
 using ApplicationLayer.Domain;
 using ApplicationLayer.Domain.Contracts;
 using ApplicationLayer.Domain.Enums;
+using ApplicationLayer.Domain.Exceptions;
 using ApplicationLayer.Domain.Models;
 
 namespace ApplicationLayer.Services;
@@ -14,6 +15,9 @@ public class AccountService : IAccountService
     }
     public async Task<Account> CreateAccountAsync(Account account)
     {
+        if (await _accountRepository.DoesAccountExist(account.AccountNumber))
+            throw new DomainException("Account already exists");
+
         await _accountRepository.Create(account);
         return account;
     }

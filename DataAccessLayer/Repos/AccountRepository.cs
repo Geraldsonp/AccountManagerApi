@@ -42,10 +42,6 @@ public class AccountRepository : CrudBaseRepo<Account>, IAccountRepository
     public async Task<bool> DoesAccountExist(string accountNumber)
     {
         var result = await _context.Accounts.AnyAsync(a => a.AccountNumber == accountNumber);
-
-        if (!result)
-            throw new NotFoundException(nameof(Account), accountNumber);
-
         return result;
     }
 }
