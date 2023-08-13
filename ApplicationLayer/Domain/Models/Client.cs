@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.Domain.Enums;
+using ApplicationLayer.Domain.Models;
 
 namespace ApplicationLayer.Domain;
 

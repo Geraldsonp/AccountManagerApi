@@ -47,3 +47,7 @@ DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.assets.cache
 DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.csproj.AssemblyReference.cache
 DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
 DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.GlobalUsings.g.cs
+AccountManagerTests/bin/*
+AccountManagerTests/obj/*
+.vscode/launch.json
+.vscode/tasks.json

@@ -10,32 +10,33 @@ public class ClientService : IClientService
     {
         _clientRepository = clientRepository;
     }
-    public Task<Client> Create(Client cliente)
+    public async Task<Client> Create(Client client)
     {
-        throw new NotImplementedException();
+        await _clientRepository.Create(client);
+        return client;
     }
 
-    public async Task<Client> Delete(int id)
+    public async Task Delete(int id)
     {
-        var cliente = await _clientRepository.Get(c => c.ClientId == id);
-        await _clientRepository.Delete(cliente);
-        return cliente;
+        var client = await _clientRepository.Get(c => c.ClientId == id);
+        await _clientRepository.Delete(client);
     }
 
     public async Task<Client> Get(int id)
     {
-        var cliente = await _clientRepository.Get(c => c.ClientId == id);
-        return cliente;
+        var client = await _clientRepository.Get(c => c.ClientId == id);
+        return client;
     }
 
     public async Task<IEnumerable<Client>> GetAll()
     {
-        var clientes = await _clientRepository.GetAll(c => true);
-        return clientes;
+        var clients = await _clientRepository.GetAll();
+        return clients;
     }
 
-    public Task<Client> Update(Client cliente)
+    public async Task<Client> Update(Client client)
     {
-        throw new NotImplementedException();
+        await _clientRepository.Update(client);
+        return client;
     }
 }

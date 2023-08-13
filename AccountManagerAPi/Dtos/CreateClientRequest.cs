@@ -6,23 +6,23 @@ namespace AccountManagerAPi.Dtos;
 public record class CreateClientRequest
 {
     [Required, MaxLength(100)]
-    public string Nombre { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
     [Required]
-    public Gender Genero { get; set; }
+    public Gender Gender { get; set; }
 
     [Required, Range(15, 100)]
-    public int Edad { get; set; }
+    public int Age { get; set; }
 
     [Required, MaxLength(20)]
-    public string Identificacion { get; set; } = null!;
+    public string Identification { get; set; } = null!;
     [Required, MaxLength(200)]
-    public string Direccion { get; set; } = null!;
+    public string Address { get; set; } = null!;
 
     [Required, MaxLength(20)]
-    public string Telefono { get; set; } = null!;
+    public string Phone { get; set; } = null!;
     [Required, MaxLength(20)]
-    public string Contrasena { get; set; } = null!;
+    public string Password { get; set; } = null!;
     [Required]
-    public Status Estado { get; set; } = Status.Active;
+    public Status Status { get; set; } = Status.Active;
 }

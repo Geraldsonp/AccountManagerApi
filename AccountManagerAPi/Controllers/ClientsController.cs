@@ -19,15 +19,19 @@ namespace AccountManagerAPi.Controllers
             _clientService = clientService;
         }
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            throw new NotImplementedException();
+            var clients = await _clientService.GetAll();
+            var clientResponses = clients.Adapt<IEnumerable<ClientResponse>>();
+            return Ok(clientResponses);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{clientId}")]
+        public async Task<IActionResult> Get(int clientId)
         {
-            throw new NotImplementedException();
+            var client = await _clientService.Get(clientId);
+            var clientResponse = client.Adapt<ClientResponse>();
+            return Ok(clientResponse);
         }
 
         [HttpPost]
@@ -35,19 +39,25 @@ namespace AccountManagerAPi.Controllers
         {
             var client = createClientRequest.Adapt<Client>();
             await _clientService.Create(client);
-            return Ok(client);
+            var clientResponse = client.Adapt<ClientResponse>();
+            return Ok(clientResponse);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id)
+        [HttpPatch("{clientId}")]
+        public async Task<IActionResult> Put(int clientId, UpdateClientRequest updateRequest)
         {
-            throw new NotImplementedException();
+            var client = await _clientService.Get(clientId);
+            client = updateRequest.Adapt(client);
+            _ = await _clientService.Update(client);
+            var clientResponse = client.Adapt<ClientResponse>();
+            return Ok(clientResponse);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{clientId}")]
+        public async Task<IActionResult> Delete(int clientId)
         {
-            throw new NotImplementedException();
+            await _clientService.Delete(clientId);
+            return NoContent();
         }
     }
 }
