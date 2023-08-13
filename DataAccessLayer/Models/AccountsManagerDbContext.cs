@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ApplicationLayer.Domain;
+using ApplicationLayer.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Models;
@@ -22,11 +23,12 @@ public partial class AccountsManagerDbContext : DbContext
 
     public virtual DbSet<Transaction> Transactions { get; set; }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountNumber).HasName("PK__Account__BE2ACD6E77619A7D");
+            entity.HasKey(e => e.AccountNumber).HasName("PK__Account__BE2ACD6E23DC7730");
 
             entity.ToTable("Account");
 
@@ -52,13 +54,11 @@ public partial class AccountsManagerDbContext : DbContext
 
         modelBuilder.Entity<Client>(entity =>
         {
-            entity.HasKey(e => e.ClientId).HasName("PK__Client__E67E1A0477BDB6D9");
+            entity.HasKey(e => e.ClientId).HasName("PK__Client__E67E1A04DE116727");
 
             entity.ToTable("Client");
 
-            entity.Property(e => e.ClientId)
-                .ValueGeneratedNever()
-                .HasColumnName("ClientID");
+            entity.Property(e => e.ClientId).HasColumnName("ClientID");
             entity.Property(e => e.Address)
                 .HasMaxLength(200)
                 .IsUnicode(false);
@@ -86,16 +86,17 @@ public partial class AccountsManagerDbContext : DbContext
 
         modelBuilder.Entity<Transaction>(entity =>
         {
-            entity.HasKey(e => e.TransactionId).HasName("PK__Transact__55433A4B5C95AE58");
+            entity.HasKey(e => e.TransactionId).HasName("PK__Transact__55433A4B46835FA7");
 
             entity.Property(e => e.TransactionId).HasColumnName("TransactionID");
             entity.Property(e => e.AccountNumber)
                 .HasMaxLength(20)
                 .IsUnicode(false);
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.Balance).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.AvailableBalance).HasColumnName("Balance").HasColumnType("decimal(10, 2)");
             entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.TransactionType)
+                .HasConversion<string>()
                 .HasMaxLength(50)
                 .IsUnicode(false);
 

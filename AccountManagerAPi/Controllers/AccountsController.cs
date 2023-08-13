@@ -1,6 +1,7 @@
 using System;
 using AccountManagerAPi.Dtos;
 using ApplicationLayer.Services;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -23,23 +24,33 @@ namespace AccountManagerAPi.Controllers
         public async Task<IActionResult> CreateAccountAsync([FromBody] CreateAccountRequest request)
         {
             var account = await _accountService.CreateAccountAsync(request.InitialBalance, request.AccountType, request.ClientId);
-
-            return CreatedAtAction(nameof(GetClientAccountAsync), new { accountNumber = account.AccountNumber, clientId = account.ClientId }, account);
+            var accountReponse = account.Adapt<AccountResponse>();
+            return CreatedAtAction("GetClientAccount", new { clientId = account.ClientId, accountNumber = account.AccountNumber }, accountReponse);
         }
 
-        [HttpGet("/clients/{clientId}/accounts/{accountNumber}")]
+        [HttpPatch("{accountNumber}")]
+        public async Task<IActionResult> UpdateAccountStatusAsync(string accountNumber, [FromBody] UpdateAccountRequest request)
+        {
+            var account = await _accountService.UpdateAccountStatusAsync(request.Status, accountNumber);
+            var accountReponse = account.Adapt<AccountResponse>();
+            return Ok(accountReponse);
+        }
+
+        [HttpGet("/Clients/{clientId}/accounts/{accountNumber}")]
+        [ActionName("GetClientAccount")]
         public async Task<IActionResult> GetClientAccountAsync(int clientId, string accountNumber)
         {
             var account = await _accountService.GetAccountByClientAsync(accountNumber, clientId);
-            return Ok(account);
+            var accountReponse = account.Adapt<AccountResponse>();
+            return Ok(accountReponse);
         }
 
-        [HttpGet("/clients/{clientId}/accounts")]
+        [HttpGet("/Clients/{clientId}/accounts")]
         public async Task<IActionResult> GetClientAccountsAsync(int clientId)
         {
             var accounts = await _accountService.GetAccountsByClientAsync(clientId);
-
-            return Ok(accounts);
+            var accountsReponse = accounts.Adapt<List<AccountResponse>>();
+            return Ok(accountsReponse);
         }
 
 
@@ -48,7 +59,8 @@ namespace AccountManagerAPi.Controllers
         public async Task<IActionResult> GetAccountAsync(string accountNumber)
         {
             var account = await _accountService.GetAccountAsync(accountNumber);
-            return Ok(account);
+            var accountReponse = account.Adapt<AccountResponse>();
+            return Ok(accountReponse);
         }
 
         //method only available for admin users
@@ -56,8 +68,8 @@ namespace AccountManagerAPi.Controllers
         public async Task<IActionResult> GetAccountsAsync()
         {
             var accounts = await _accountService.GetAccountsAsync();
-
-            return Ok(accounts);
+            var accountsReponse = accounts.Adapt<List<AccountResponse>>();
+            return Ok(accountsReponse);
         }
 
     }

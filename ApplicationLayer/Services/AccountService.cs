@@ -1,6 +1,7 @@
 using ApplicationLayer.Domain;
 using ApplicationLayer.Domain.Contracts;
 using ApplicationLayer.Domain.Enums;
+using ApplicationLayer.Domain.Models;
 
 namespace ApplicationLayer.Services;
 
@@ -28,13 +29,13 @@ public class AccountService : IAccountService
 
     public Task<Account> GetAccountByClientAsync(string accountNumber, int clientId)
     {
-        var account = _accountRepository.Get(c => c.AccountNumber == accountNumber && c.ClientId == clientId);
+        var account = _accountRepository.GetAccountWithTransactions(accountNumber, clientId);
         return account;
     }
 
     public async Task<IEnumerable<Account>> GetAccountsByClientAsync(int clientId)
     {
-        return await _accountRepository.GetAll(x => x.ClientId == clientId);
+        return await _accountRepository.GetAccountsWithTransactions(clientId);
     }
 
     public async Task<Account> UpdateAccountStatusAsync(Status accountStatus, string AccountNumber)
@@ -47,10 +48,11 @@ public class AccountService : IAccountService
 
     public Task<Account> GetAccountAsync(string id)
     {
-        return _accountRepository.Get(c => c.AccountNumber == id);
+        return _accountRepository.GetAccountWithTransactions(id); ;
     }
     public async Task<IEnumerable<Account>> GetAccountsAsync()
     {
-        return await _accountRepository.GetAll(c => true);
+        return await _accountRepository.GetAccountsWithTransactions();
     }
+
 }
