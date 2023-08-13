@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AccountManagerAPi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[api/controller]")]
     public class TransactionsController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
