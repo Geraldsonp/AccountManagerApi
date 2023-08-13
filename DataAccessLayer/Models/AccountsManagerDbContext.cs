@@ -48,8 +48,8 @@ public partial class AccountsManagerDbContext : DbContext
 
             entity.HasOne(d => d.Client).WithMany(p => p.Accounts)
                 .HasForeignKey(d => d.ClientId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Account__ClientI__4BAC3F29");
+                .HasConstraintName("FK__Account__ClientI__4BAC3F29")
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Client>(entity =>
@@ -102,7 +102,8 @@ public partial class AccountsManagerDbContext : DbContext
 
             entity.HasOne(d => d.AccountNumberNavigation).WithMany(p => p.Transactions)
                 .HasForeignKey(d => d.AccountNumber)
-                .HasConstraintName("FK__Transacti__Accou__4E88ABD4");
+                .HasConstraintName("FK__Transacti__Accou__4E88ABD4")
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         OnModelCreatingPartial(modelBuilder);
