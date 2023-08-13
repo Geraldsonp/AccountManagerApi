@@ -2,6 +2,7 @@ using DataAccessLayer;
 using ApplicationLayer;
 using System.Text.Json.Serialization;
 using Mapster;
+using AccountManagerAPi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
