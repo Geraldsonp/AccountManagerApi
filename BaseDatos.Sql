@@ -1,19 +1,14 @@
-﻿drop database if exists AccountsManagerDB
-go
-
+﻿
 CREATE DATABASE AccountsManagerDB;
 
 USE AccountsManagerDB;
 
-CREATE DATABASE AccountMngDB;
-
-USE AccountMngDB;
-
--- CREATE TABLE Person (Remove this section, as you don't need a separate table for Person)
-
 CREATE TABLE Client
 (
-    ClientID INT PRIMARY KEY,
+
+ClientID INT
+PRIMARY KEY IDENTITY
+(1, 1),
     Name VARCHAR(100) NOT NULL,
     Gender VARCHAR(10) NOT NULL,
     Age INT NOT NULL,
@@ -32,18 +27,28 @@ CREATE TABLE Account
     Status VARCHAR(20) NOT NULL,
     ClientID INT NOT NULL,
     FOREIGN KEY (ClientID) REFERENCES Client(ClientID)
+
+On
+DELETE CASCADE
 );
 
 -- Table for Transactions
 CREATE TABLE Transactions
 (
-    TransactionID INT PRIMARY KEY IDENTITY,
+
+TransactionID INT
+PRIMARY KEY IDENTITY
+(1, 1),
     AccountNumber VARCHAR(20),
     Date DATETIME NOT NULL,
     TransactionType VARCHAR(50) NOT NULL,
     Amount DECIMAL(10, 2) NOT NULL,
     Balance DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (AccountNumber) REFERENCES Account(AccountNumber)
+On
+DELETE CASCADE
 );
+
+
 
 
