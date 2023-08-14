@@ -9,14 +9,20 @@ namespace ApplicationLayer.Services;
 public class AccountService : IAccountService
 {
     private readonly IAccountRepository _accountRepository;
-    public AccountService(IAccountRepository accountRepository)
+    private readonly IClientRepository _clientRepository;
+
+    public AccountService(IAccountRepository accountRepository, IClientRepository clientRepository)
     {
         _accountRepository = accountRepository;
+        _clientRepository = clientRepository;
     }
     public async Task<Account> CreateAccountAsync(Account account)
     {
         if (await _accountRepository.DoesAccountExist(account.AccountNumber))
             throw new DomainException("Account already exists");
+
+        if (await _clientRepository.DoesClientExist(account.ClientId) == false)
+            throw new NotFoundException("Client does not exist");
 
         await _accountRepository.Create(account);
         return account;

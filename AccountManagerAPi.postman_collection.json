@@ -1,0 +1,1157 @@
+{
+	"info": {
+		"_postman_id": "c7a82464-2a46-48b1-9d82-97c469328ee4",
+		"name": "AccountManagerAPi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18843814"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "/api/Accounts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountNumber\": \"12346\",\n  \"accountType\": \"Checking\",\n  \"clientId\": \"15\",\n  \"initialBalance\": 300,\n  \"status\": \"Active\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Accounts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"Checking\",\n  \"clientId\": \"<integer>\",\n  \"initialBalance\": \"<double>\",\n  \"status\": \"Inactive\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7280/api/Accounts",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Accounts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Accounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Accounts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/api/Accounts",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Accounts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Accounts/:accountNumber",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"Active\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Accounts/:accountNumber",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Accounts",
+								":accountNumber"
+							],
+							"variable": [
+								{
+									"key": "accountNumber",
+									"value": "1234"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"Active\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7280/api/Accounts/:accountNumber",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Accounts",
+										":accountNumber"
+									],
+									"variable": [
+										{
+											"key": "accountNumber"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Accounts/:accountNumber",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Accounts/:accountNumber",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Accounts",
+								":accountNumber"
+							],
+							"variable": [
+								{
+									"key": "accountNumber",
+									"value": "1234"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/api/Accounts/:accountNumber",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Accounts",
+										":accountNumber"
+									],
+									"variable": [
+										{
+											"key": "accountNumber"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Accounts/:accountNumber",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Accounts/:accountNumber",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Accounts",
+								":accountNumber"
+							],
+							"variable": [
+								{
+									"key": "accountNumber",
+									"value": "1234"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/api/Accounts/:accountNumber",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Accounts",
+										":accountNumber"
+									],
+									"variable": [
+										{
+											"key": "accountNumber"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/Clients/:clientId/accounts/:accountNumber",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Clients/:clientId/accounts/:accountNumber",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Clients",
+								":clientId",
+								"accounts",
+								":accountNumber"
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "<integer>"
+								},
+								{
+									"key": "accountNumber",
+									"value": "<string>"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/Clients/:clientId/accounts/:accountNumber",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"Clients",
+										":clientId",
+										"accounts",
+										":accountNumber"
+									],
+									"variable": [
+										{
+											"key": "clientId"
+										},
+										{
+											"key": "accountNumber"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/Clients/:clientId/accounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Clients/:clientId/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Clients",
+								":clientId",
+								"accounts"
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/Clients/:clientId/accounts",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"Clients",
+										":clientId",
+										"accounts"
+									],
+									"variable": [
+										{
+											"key": "clientId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "/api/Clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Clients",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Clients"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/api/Clients",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Clients"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Clients",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"address\": \"Otalvo sn y principal\",\n  \"name\": \"Jose Lema\",\n  \"password\": \"1234\",\n  \"phone\": \"09283421\",\n  \"status\": \"Active\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Clients",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Clients"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"address\": \"<string>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"status\": \"Inactive\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7280/api/Clients",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Clients"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Clients/:clientId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Clients/:clientId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Clients",
+								":clientId"
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/api/Clients/:clientId",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Clients",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Clients/:clientId",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"address\": \"Correa y sidron\",\n  \"phone\": \"09323424\",\n  \"status\": \"Active\",\n  \"gender\": \"Female\",\n  \"age\": 25,\n  \"identification\": \"ABC-1234\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Clients/:clientId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Clients",
+								":clientId"
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"address\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"status\": \"Active\",\n  \"gender\": \"Female\",\n  \"age\": \"<integer>\",\n  \"identification\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7280/api/Clients/:clientId",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Clients",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Clients/:clientId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Clients/:clientId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Clients",
+								":clientId"
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/api/Clients/:clientId",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Clients",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "/api/Reports/:clientId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Reports/:clientId?From=2023-08-13&To=2023-08-13",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Reports",
+								":clientId"
+							],
+							"query": [
+								{
+									"key": "From",
+									"value": "2023-08-13"
+								},
+								{
+									"key": "To",
+									"value": "2023-08-13"
+								}
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/api/Reports/:clientId?From=<dateTime>&To=<dateTime>",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Reports",
+										":clientId"
+									],
+									"query": [
+										{
+											"key": "From",
+											"value": "<dateTime>"
+										},
+										{
+											"key": "To",
+											"value": "<dateTime>"
+										}
+									],
+									"variable": [
+										{
+											"key": "clientId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "/api/Transactions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountNumber\": \"12346\",\n  \"amount\": -50\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Transactions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountNumber\": \"<string>\",\n  \"amount\": \"<double>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7280/api/Transactions",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"api",
+										"Transactions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/Accounts/:accountNumber/Transactions/:transactionId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Accounts/:accountNumber/Transactions/:transactionId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Accounts",
+								":accountNumber",
+								"Transactions",
+								":transactionId"
+							],
+							"variable": [
+								{
+									"key": "accountNumber",
+									"value": "<string>"
+								},
+								{
+									"key": "transactionId",
+									"value": "<integer>"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/Accounts/:accountNumber/Transactions/:transactionId",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"Accounts",
+										":accountNumber",
+										"Transactions",
+										":transactionId"
+									],
+									"variable": [
+										{
+											"key": "accountNumber"
+										},
+										{
+											"key": "transactionId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/Accounts/:accountNumber/Transactions/:transactionId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Accounts/:accountNumber/Transactions/:transactionId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Accounts",
+								":accountNumber",
+								"Transactions",
+								":transactionId"
+							],
+							"variable": [
+								{
+									"key": "accountNumber",
+									"value": "<string>"
+								},
+								{
+									"key": "transactionId",
+									"value": "<integer>"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/Accounts/:accountNumber/Transactions/:transactionId",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"Accounts",
+										":accountNumber",
+										"Transactions",
+										":transactionId"
+									],
+									"variable": [
+										{
+											"key": "accountNumber"
+										},
+										{
+											"key": "transactionId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/Accounts/:accountNumber/Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Accounts/:accountNumber/Transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Accounts",
+								":accountNumber",
+								"Transactions"
+							],
+							"variable": [
+								{
+									"key": "accountNumber",
+									"value": "<string>"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7280/Accounts/:accountNumber/Transactions",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7280",
+									"path": [
+										"Accounts",
+										":accountNumber",
+										"Transactions"
+									],
+									"variable": [
+										{
+											"key": "accountNumber"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:7280"
+		}
+	]
+}

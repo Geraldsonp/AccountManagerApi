@@ -17,6 +17,7 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddLogging(builder => builder.AddConsole());
 builder.Services.RegisterDalServices(builder.Configuration);
 builder.Services.AddServiceLayer();
 TypeAdapterConfig.GlobalSettings.Default.IgnoreNullValues(true);

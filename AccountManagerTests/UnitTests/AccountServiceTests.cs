@@ -16,11 +16,13 @@ namespace AccountManagerTests.UnitTests
     {
         private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
+        private readonly IClientRepository _clientRepository;
 
         public AccountServiceTests()
         {
             _accountRepository = Substitute.For<IAccountRepository>();
-            _accountService = new AccountService(_accountRepository);
+            _clientRepository = Substitute.For<IClientRepository>();
+            _accountService = new AccountService(_accountRepository, _clientRepository);
         }
 
         [Fact]
@@ -39,6 +41,7 @@ namespace AccountManagerTests.UnitTests
                 Status = Status.Active
             };
 
+            _clientRepository.DoesClientExist(account.ClientId).Returns(true);
             _accountRepository.Create(Arg.Any<Account>()).Returns(callInfo =>
             {
                 var createdAccount = callInfo.Arg<Account>();
